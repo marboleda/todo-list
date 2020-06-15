@@ -2,24 +2,24 @@
 
 const Project = (title, description, dueDate, priority, toDoList) => {
 
-    getProjectTitle = () => title;    
-    getProjectDescription = () => description;
-    getProjectDueDate = () => dueDate;
-    getProjectPriority = () => priority;
-    getToDoList = () => toDoList;
+    const getTitle = () => title;    
+    const getDescription = () => description;
+    const getDueDate = () => dueDate;
+    const getPriority = () => priority;
+    const getToDoList = () => toDoList;
 
     return { getTitle, getDescription, getDueDate, getPriority, getToDoList}
 }
 
 const ToDo = (title, description, dueDate, priority, checkList) => {
     
-    getToDoTitle = () => title;
-    getToDoDescription = () => description;
-    getToDoDueDate = () => dueDate;
-    getToDoPriority = () => priority;
-    getCheckList = () => checkList;
+    const getTitle = () => title;
+    const getDescription = () => description;
+    const getDueDate = () => dueDate;
+    const getPriority = () => priority;
+    const getCheckList = () => checkList;
 
-    return { getToDoTitle, getToDoDescription, getToDoDueDate, getToDoPriority, getCheckList};
+    return { getTitle, getDescription, getDueDate, getPriority, getCheckList};
 
 }
 
