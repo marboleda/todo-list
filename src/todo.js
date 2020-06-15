@@ -1,4 +1,5 @@
 //contains all functionality (create, edit, remove, etc.) pertaining to To-Do List items
+
 const Project = (title, description, dueDate, priority, toDoList) => {
 
     getProjectTitle = () => title;    
@@ -21,3 +22,9 @@ const ToDo = (title, description, dueDate, priority, checkList) => {
     return { getToDoTitle, getToDoDescription, getToDoDueDate, getToDoPriority, getCheckList};
 
 }
+
+const createNewProject = (title, description, dueDate, priority, toDoList) => {
+    return Project(title, description, dueDate, priority, toDoList);
+}
+
+export {createNewProject}
