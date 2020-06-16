@@ -1,4 +1,4 @@
-import { createNewProject } from './todo'
+import { createNewProject, addNewToDo } from './project'
 import { format, endOfToday } from 'date-fns'
 
 const initialPageLoad = () => {
@@ -8,7 +8,8 @@ const initialPageLoad = () => {
                                             "Your first project!", 
                                             format(endOfToday(), 'MM/dd/yyyy hh:mm a'), 
                                             0, 
-                                            {});
+                                            []);
+
 }
 
 export default initialPageLoad;
