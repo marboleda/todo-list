@@ -8,12 +8,16 @@ const Project = (title, description, dueDate, priority, toDoList) => {
     const getPriority = () => priority;
     const getToDoList = () => toDoList;
 
-    const addToDoItemToList = (toDoTitle, toDoDescription, toDoDueDate, toDoPriority) => {
+    const addToDoItem = (toDoTitle, toDoDescription, toDoDueDate, toDoPriority) => {
         toDoList.push(createNewToDo(toDoTitle, toDoDescription, toDoDueDate, toDoPriority, []));
     }
 
+    const deleteToDo = (index) => {
+        toDoList.splice(index, 1);
+    }
+
     return { getTitle, getDescription, getDueDate, getPriority, getToDoList,
-             addToDoItemToList }
+             addToDoItem, deleteToDo }
 }
 
 const createNewProject = (title, description, dueDate, priority, toDoList) => {
