@@ -9,6 +9,7 @@ const initialPageLoad = () => {
                                             format(addMonths(endOfToday(), 6), 'MM/dd/yyyy hh:mm a'), 
                                             0, 
                                             []);
+
 }
 
 export default initialPageLoad;

@@ -8,7 +8,12 @@ const ToDo = (title, description, dueDate, priority, checkList) => {
     const getPriority = () => priority;
     const getCheckList = () => checkList;
 
-    return { getTitle, getDescription, getDueDate, getPriority, getCheckList};
+    const addItemToCheckList = (note) => {
+        checkList.push(note);
+    }
+
+    return { getTitle, getDescription, getDueDate, getPriority, getCheckList,
+             addItemToCheckList };
 }
 
 const createNewToDo = (title, description, dueDate, priority, checkList) => {
