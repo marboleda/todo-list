@@ -12,8 +12,12 @@ const ToDo = (title, description, dueDate, priority, checkList) => {
         checkList.push(note);
     }
 
+    const deleteCheckListItem = (index) => {
+        checkList.splice(index,1);
+    }
+
     return { getTitle, getDescription, getDueDate, getPriority, getCheckList,
-             addItemToCheckList };
+             addItemToCheckList, deleteCheckListItem };
 }
 
 const createNewToDo = (title, description, dueDate, priority, checkList) => {
