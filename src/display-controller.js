@@ -20,19 +20,19 @@ const renderProject = (project, projectID) => {
     projectInfo.classList.add('project-info');
 
     const projectTitle = document.createElement('h3');
-    projectTitle.textContent = project.getTitle();
+    projectTitle.textContent = project.title;
     
     const projectDescription = document.createElement('p'); 
     projectDescription.classList.add('project-description');
-    projectDescription.textContent = project.getDescription();
+    projectDescription.textContent = project.description;
 
     const projectDueDate = document.createElement('p');
     projectDueDate.classList.add('project-due-date');
-    projectDueDate.textContent = project.getDueDate();
+    projectDueDate.textContent = project.dueDate;
 
     const projectPriority = document.createElement('p');
     projectPriority.classList.add('project-priority');
-    projectPriority.textContent = project.getPriority();
+    projectPriority.textContent = project.priority;
 
     projectInfo.appendChild(projectTitle);
     projectInfo.appendChild(projectDescription);
@@ -41,13 +41,14 @@ const renderProject = (project, projectID) => {
 
     projectDiv.appendChild(projectInfo);
 
-    const toDoItems = document.createELement('div');
+    const toDoItems = document.createElement('div');
     toDoItems.classList.add('todo-items');
 
-    project.getToDoList().forEach((todo) => {
+    project.toDoList.forEach((toDo) => {
         renderToDo(projectID, toDo);
     });
 
+    document.body.appendChild(projectDiv)
 }
 
 const renderToDo = (projectID, toDo) => {
