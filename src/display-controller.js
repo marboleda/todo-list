@@ -45,8 +45,12 @@ const renderProject = (project, projectID) => {
     toDoItems.classList.add('todo-items');
 
     project.getToDoList().forEach((todo) => {
-        renderToDo(projectDiv);
+        renderToDo(projectID, toDo);
     });
+
+}
+
+const renderToDo = (projectID, toDo) => {
 
 }
 
