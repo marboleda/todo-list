@@ -11,6 +11,16 @@ const displayCurrentProjects = (projectArray) => {
     
 }
 
+const displayCreateNewProjectButton = () => {
+    const newProjectButton = document.createElement('button');
+    newProjectButton.id = 'new-project-button';
+    newProjectButton.textContent = 'New Project';
+    newProjectButton.addEventListener('click', () => {
+        
+    });
+    document.body.appendChild(newProjectButton);           
+}
+
 const renderProject = (project, projectID) => {
     const projectDiv = document.createElement('div');
     projectDiv.classList.add('project');
@@ -51,8 +61,9 @@ const renderProject = (project, projectID) => {
     document.body.appendChild(projectDiv)
 }
 
+
 const renderToDo = (projectID, toDo) => {
 
 }
 
-export {displayWebPageTitle, displayCurrentProjects}
+export {displayWebPageTitle, displayCurrentProjects, displayCreateNewProjectButton}

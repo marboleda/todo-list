@@ -1,11 +1,9 @@
 import { createNewProject } from './project'
 import { format, endOfToday, addMonths } from 'date-fns'
 import storageAvailable from './local-storage'
-import { displayWebPageTitle, displayCurrentProjects } from './display-controller'
+import { displayWebPageTitle, displayCurrentProjects, displayCreateNewProjectButton } from './display-controller'
 
 const initialPageLoad = () => {
-
-    let projects = JSON.parse(localStorage.getItem('projects') || '[]');
 
     const createDefaultProject = () => {
         const defaultProject = createNewProject('Default Project', 
@@ -23,9 +21,10 @@ const initialPageLoad = () => {
         localStorage.setItem('projects', JSON.stringify([projectObj]));
     }
 
+    let projects = JSON.parse(localStorage.getItem('projects') || '[]');
+
     displayWebPageTitle('ToDo List');
     
-    //Should only generate default project if no projects exist yet
     if (storageAvailable('localStorage') && localStorage.getItem('projects')){
         if (projects.length > 0) {
             displayCurrentProjects(projects);
@@ -36,6 +35,7 @@ const initialPageLoad = () => {
         createDefaultProject();
     }
 
+    displayCreateNewProjectButton();
 
 }
 
