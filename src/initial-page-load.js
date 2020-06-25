@@ -21,19 +21,14 @@ const initialPageLoad = () => {
         localStorage.setItem('projects', JSON.stringify([projectObj]));
     }
 
-    let projects = JSON.parse(localStorage.getItem('projects') || '[]');
-
     displayWebPageTitle('ToDo List');
     
-    if (storageAvailable('localStorage') && localStorage.getItem('projects')){
-        if (projects.length > 0) {
-            displayCurrentProjects(projects);
-        } else {
-            createDefaultProject();
-        }
-    } else {
+    if (!storageAvailable('localStorage') || !localStorage.getItem('projects')){
         createDefaultProject();
     }
+
+    let projects = JSON.parse(localStorage.getItem('projects') || '[]');
+    displayCurrentProjects(projects);
 
     displayCreateNewProjectButton();
 
