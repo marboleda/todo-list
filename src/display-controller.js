@@ -77,7 +77,11 @@ const renderProject = (project, projectID) => {
         toDoDiv.appendChild(toDoDescription);
         toDoDiv.appendChild(toDoDueDate);
         toDoDiv.appendChild(toDoPriority);
+
+        toDoItems.appendChild(toDoDiv);
     });
+
+    projectDiv.appendChild(toDoItems);
 
     document.body.appendChild(projectDiv);
 }
