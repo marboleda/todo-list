@@ -21,6 +21,17 @@ const displayCreateNewProjectButton = () => {
     document.body.appendChild(newProjectButton);           
 }
 
+const createAddToDoButton = (projectID) => {
+    const newToDoButton = document.createElement('button');
+    newToDoButton.classList.add('new-todo');
+    newToDoButton.textContent = 'Add To-Do Item'
+    newToDoButton.addEventListener('click', () => {
+
+    });
+
+    return newToDoButton;
+}
+
 const renderProject = (project, projectID) => {
     const projectDiv = document.createElement('div');
     projectDiv.classList.add('project');
@@ -55,7 +66,7 @@ const renderProject = (project, projectID) => {
     toDoItems.classList.add('todo-items');
 
     const toDoObjs = JSON.parse(localStorage.getItem(`project-${projectID}-todos`) || '[]');
-
+    
     toDoObjs.forEach((toDo, toDoID) => {
         const toDoDiv = document.createElement('div');
         toDoDiv.classList.add('todo');
