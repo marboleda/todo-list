@@ -54,16 +54,33 @@ const renderProject = (project, projectID) => {
     const toDoItems = document.createElement('div');
     toDoItems.classList.add('todo-items');
 
-    project.toDoList.forEach((toDo) => {
-        renderToDo(projectID, toDo);
+    const toDoObjs = JSON.parse(localStorage.getItem(`project-${projectID}-todos`) || '[]');
+
+    toDoObjs.forEach((toDo, toDoID) => {
+        const toDoDiv = document.createElement('div');
+        toDoDiv.classList.add('todo');
+        toDoDiv.setAttribute('data-todo', `${projectID.toString()}-${toDoID}` );
+
+        const toDoTitle = document.createElement('h4');
+        toDoTitle.textContent = toDo.title;
+
+        const toDoDescription = document.createElement('p');
+        toDoDescription.textContent = toDo.Description;
+
+        const toDoDueDate = document.createElement('p');
+        toDoDueDate.textContent = toDo.dueDate;
+
+        const toDoPriority = document.createElement('p');
+        toDoPriority.textContent = toDo.priority;
+
+        toDoDiv.appendChild(toDoTitle);
+        toDoDiv.appendChild(toDoDescription);
+        toDoDiv.appendChild(toDoDueDate);
+        toDoDiv.appendChild(toDoPriority);
     });
 
-    document.body.appendChild(projectDiv)
+    document.body.appendChild(projectDiv);
 }
 
-
-const renderToDo = (projectID, toDo) => {
-
-}
 
 export {displayWebPageTitle, displayCurrentProjects, displayCreateNewProjectButton}

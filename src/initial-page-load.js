@@ -16,9 +16,10 @@ const initialPageLoad = () => {
                 description: defaultProject.getDescription(),
                 dueDate: defaultProject.getDueDate(),
                 priority: defaultProject.getPriority(),
-                toDoList: defaultProject.getToDoList()
+                //toDoList: defaultProject.getToDoList()
         };
         localStorage.setItem('projects', JSON.stringify([projectObj]));
+        localStorage.setItem('project-0-todos', JSON.stringify(defaultProject.getToDoList()));
     }
 
     displayWebPageTitle('ToDo List');
