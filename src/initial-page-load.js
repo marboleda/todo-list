@@ -6,11 +6,13 @@ import { displayWebPageTitle, displayCurrentProjects, displayCreateNewProjectBut
 const initialPageLoad = () => {
 
     const createDefaultProject = () => {
+
         const defaultProject = createNewProject('Default Project', 
                                                 "Your first project!", 
                                                 format(addMonths(endOfToday(), 6), 'MM/dd/yyyy hh:mm a'), 
                                                 0, 
                                                 []);
+
         const projectObj = {
                 title: defaultProject.getTitle(),
                 description: defaultProject.getDescription(),

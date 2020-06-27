@@ -1,3 +1,5 @@
+import { createNewToDo } from './todo'
+
 const displayWebPageTitle = (title) => {
     const webPageTitle = document.createElement('h1');
     webPageTitle.textContent = title;
@@ -26,11 +28,49 @@ const createAddToDoButton = (projectID) => {
     newToDoButton.classList.add('new-todo');
     newToDoButton.textContent = 'Add To-Do Item'
     newToDoButton.addEventListener('click', () => {
-
+        openNewToDoForm();
     });
 
     return newToDoButton;
 }
+
+const createNewToDoForm = (projectID) => {
+    const newToDoForm = document.createElement('form');
+    newToDoForm.setAttribute('action', '');
+    newToDoForm.classList.add('new-todo-form');
+    newToDoForm.setAttribute('name', 'todo');
+
+    const header = document.createElement('p');
+    header.textContent = "Enter the new To Do's information";
+    
+    const titleLabel = document.createElement('label');
+    titleLabel.setAttribute('for', 'title');
+    titleLabel.innerHTML = '<strong>Title:</strong>';
+    
+    const titleInput = document.createElement('input');
+    titleInput.setAttribute('type','text');
+    titleInput.setAttribute('name','title');
+    titleInput.required = true;
+
+    const descriptionLabel = document.createElement('label');
+    descriptionLabel.setAttribute('for', 'description');
+    descriptionLabel.innerHTML = '<strong>Description:</strong>';
+    
+    const descriptionInput = document.createElement('textarea');
+    descriptionInput.setAttribute('rows','3');
+    descriptionInput.setAttribute('cols', '100');
+    descriptionInput.setAttribute('name','description');
+    descriptionInput.required = true;
+
+    newToDoForm.appendChild(header);
+    newToDoForm.appendChild(titleLabel);
+    newToDoForm.appendChild(titleInput);
+    newToDoForm.appendChild(descriptionLabel);
+    newToDoForm.appendChild(descriptionInput);
+
+    return newToDoForm;
+}
+
 
 const renderProject = (project, projectID) => {
     const projectDiv = document.createElement('div');
@@ -93,6 +133,9 @@ const renderProject = (project, projectID) => {
     });
 
     projectDiv.appendChild(toDoItems);
+
+    projectDiv.appendChild(createAddToDoButton(projectID));
+    projectDiv.appendChild(createNewToDoForm(projectID));
 
     document.body.appendChild(projectDiv);
 }
