@@ -28,7 +28,9 @@ const createAddToDoButton = (projectID) => {
     newToDoButton.classList.add('new-todo');
     newToDoButton.textContent = 'Add To-Do Item'
     newToDoButton.addEventListener('click', () => {
-        openNewToDoForm();
+        const form = document.getElementById(`project-${projectID}-newToDoForm`);
+        form.style.display = 'flex';
+        form.style['flex-direction'] = 'column';
     });
 
     return newToDoButton;
@@ -37,6 +39,7 @@ const createAddToDoButton = (projectID) => {
 const createNewToDoForm = (projectID) => {
     const newToDoForm = document.createElement('form');
     newToDoForm.setAttribute('action', '');
+    newToDoForm.id = `project-${projectID}-newToDoForm`;
     newToDoForm.classList.add('new-todo-form');
     newToDoForm.setAttribute('name', 'todo');
 
@@ -62,11 +65,18 @@ const createNewToDoForm = (projectID) => {
     descriptionInput.setAttribute('name','description');
     descriptionInput.required = true;
 
+    const submitButton = document.createElement('button');
+    submitButton.textContent = 'Submit';
+    submitButton.setAttribute('type','submit');
+
     newToDoForm.appendChild(header);
     newToDoForm.appendChild(titleLabel);
     newToDoForm.appendChild(titleInput);
     newToDoForm.appendChild(descriptionLabel);
     newToDoForm.appendChild(descriptionInput);
+    newToDoForm.appendChild(submitButton);
+
+    newToDoForm.classList.add('popup-form');
 
     return newToDoForm;
 }
