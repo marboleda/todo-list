@@ -29,8 +29,15 @@ const createAddToDoButton = (projectID) => {
     newToDoButton.textContent = 'Add To-Do Item'
     newToDoButton.addEventListener('click', () => {
         const form = document.getElementById(`project-${projectID}-newToDoForm`);
-        form.style.display = 'flex';
-        form.style['flex-direction'] = 'column';
+        const displaySetting = form.style.display;
+        if (displaySetting === 'none') {
+            form.style.display = 'flex';
+            form.style['flex-direction'] = 'column';           
+        } else {
+            form.style.display = 'none';
+            form.style.removeProperty('flex-direction');
+        }
+
     });
 
     return newToDoButton;
