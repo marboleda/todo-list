@@ -54,6 +54,8 @@ const createNewProjectForm = () => {
 
     newProjectForm.style['display'] = 'none';
 
+    newProjectForm.addEventListener('submit', e => e.preventDefault());
+
     document.body.appendChild(newProjectForm);
 }
 
@@ -137,6 +139,8 @@ const createNewToDoForm = (projectID) => {
     newToDoForm.appendChild(submitButton);
 
     newToDoForm.style['display'] = 'none';
+
+    newToDoForm.addEventListener('submit', e => e.preventDefault());
 
     return newToDoForm;
 }
