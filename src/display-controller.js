@@ -13,14 +13,67 @@ const displayCurrentProjects = (projectArray) => {
     
 }
 
+const createNewProjectForm = () => {
+    const newProjectForm = document.createElement('form');
+    newProjectForm.setAttribute('action', '');
+    newProjectForm.id = `new-project-form`;
+    newProjectForm.setAttribute('name', 'project');
+
+    const header = document.createElement('p');
+    header.textContent = "Enter the new Project's information";
+    
+    const titleLabel = document.createElement('label');
+    titleLabel.setAttribute('for', 'title');
+    titleLabel.innerHTML = '<strong>Title:</strong>';
+    
+    const titleInput = document.createElement('input');
+    titleInput.setAttribute('type','text');
+    titleInput.setAttribute('name','title');
+    titleInput.required = true;
+
+    const descriptionLabel = document.createElement('label');
+    descriptionLabel.setAttribute('for', 'description');
+    descriptionLabel.innerHTML = '<strong>Description:</strong>';
+    
+    const descriptionInput = document.createElement('textarea');
+    descriptionInput.setAttribute('rows','3');
+    descriptionInput.setAttribute('cols', '100');
+    descriptionInput.setAttribute('name','description');
+    descriptionInput.required = true;
+
+    const submitButton = document.createElement('button');
+    submitButton.textContent = 'Submit';
+    submitButton.setAttribute('type','submit');
+
+    newProjectForm.appendChild(header);
+    newProjectForm.appendChild(titleLabel);
+    newProjectForm.appendChild(titleInput);
+    newProjectForm.appendChild(descriptionLabel);
+    newProjectForm.appendChild(descriptionInput);
+    newProjectForm.appendChild(submitButton);
+
+    newProjectForm.style['display'] = 'none';
+
+    document.body.appendChild(newProjectForm);
+}
+
 const displayCreateNewProjectButton = () => {
     const newProjectButton = document.createElement('button');
     newProjectButton.id = 'new-project-button';
     newProjectButton.textContent = 'New Project';
     newProjectButton.addEventListener('click', () => {
-        
+        const form = document.getElementById('new-project-form');
+        const displaySetting = form.style.display;
+        if (displaySetting === 'none') {
+            form.style.display = 'flex';
+            form.style['flex-direction'] = 'column';           
+        } else {
+            form.style.display = 'none';
+            form.style.removeProperty('flex-direction');
+        }
     });
-    document.body.appendChild(newProjectButton);           
+    document.body.appendChild(newProjectButton);
+    createNewProjectForm();           
 }
 
 const createAddToDoButton = (projectID) => {
@@ -83,7 +136,7 @@ const createNewToDoForm = (projectID) => {
     newToDoForm.appendChild(descriptionInput);
     newToDoForm.appendChild(submitButton);
 
-    newToDoForm.classList.add('popup-form');
+    newToDoForm.style['display'] = 'none';
 
     return newToDoForm;
 }
