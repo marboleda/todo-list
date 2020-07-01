@@ -1,4 +1,6 @@
 import { createNewToDo } from './todo'
+import { createNewProject } from './project'
+import { format, endOfToday, addMonths } from 'date-fns'
 
 const displayWebPageTitle = (title) => {
     const webPageTitle = document.createElement('h1');
@@ -17,7 +19,7 @@ const createNewProjectForm = () => {
     const newProjectForm = document.createElement('form');
     newProjectForm.setAttribute('action', '');
     newProjectForm.id = `new-project-form`;
-    newProjectForm.setAttribute('name', 'project');
+    newProjectForm.setAttribute('name', 'new-project');
 
     const header = document.createElement('p');
     header.textContent = "Enter the new Project's information";
@@ -54,7 +56,25 @@ const createNewProjectForm = () => {
 
     newProjectForm.style['display'] = 'none';
 
-    newProjectForm.addEventListener('submit', e => e.preventDefault());
+    newProjectForm.addEventListener('submit', (e) => {
+        const newProjectForm = document.forms['new-project'];
+        const newProject = createNewProject(newProjectForm.elements['title'].value,
+                                            newProjectForm.elements['description'].value,
+                                            format(addMonths(endOfToday(), 6), 'MM/dd/yyyy hh:mm a'),
+                                            0,
+                                            []);
+        const newProjectObj = {
+            title: newProject.getTitle(),
+            description: newProject.getDescription(),
+            dueDate: newProject.getDueDate(),
+            priority: newProject.getPriority()
+        }
+        console.log(newProjectObj);
+        let projects = JSON.parse(localStorage.getItem('projects') || '[]');
+        projects.push(newProjectObj);
+        localStorage.setItem('projects', JSON.stringify(projects));
+        e.preventDefault();
+    });
 
     document.body.appendChild(newProjectForm);
 }
