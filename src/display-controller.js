@@ -5,7 +5,7 @@ import { format, endOfToday, addMonths } from 'date-fns'
 const displayWebPageTitle = (title) => {
     const webPageTitle = document.createElement('h1');
     webPageTitle.textContent = title;
-    document.body.appendChild(webPageTitle);
+    document.body.prepend(webPageTitle);
 }
 
 const displayCurrentProjects = (projectArray) => {
@@ -74,6 +74,10 @@ const createNewProjectForm = () => {
         projects.push(newProjectObj);
         localStorage.setItem('projects', JSON.stringify(projects));
         e.preventDefault();
+
+        document.getElementById('content').textContent = '';
+        displayCurrentProjects(projects);
+
     });
 
     document.body.appendChild(newProjectForm);
@@ -231,7 +235,7 @@ const renderProject = (project, projectID) => {
     projectDiv.appendChild(createAddToDoButton(projectID));
     projectDiv.appendChild(createNewToDoForm(projectID));
 
-    document.body.appendChild(projectDiv);
+    document.getElementById('content').appendChild(projectDiv);
 }
 
 
