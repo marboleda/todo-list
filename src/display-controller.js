@@ -69,7 +69,6 @@ const createNewProjectForm = () => {
             dueDate: newProject.getDueDate(),
             priority: newProject.getPriority()
         }
-        console.log(newProjectObj);
         let projects = JSON.parse(localStorage.getItem('projects') || '[]');
         projects.push(newProjectObj);
         localStorage.setItem('projects', JSON.stringify(projects));
@@ -164,7 +163,26 @@ const createNewToDoForm = (projectID) => {
 
     newToDoForm.style['display'] = 'none';
 
-    newToDoForm.addEventListener('submit', e => e.preventDefault());
+    newToDoForm.addEventListener('submit', (e) => {
+        const newToDoForm = document.forms[`project-${projectID}-newToDoForm`];
+        const newToDo = createNewToDo(newToDoForm.elements['title'].value,
+                                      newToDoForm.elements['description'].value,
+                                      format(addMonths(endOfToday(), 3), 'MM/dd/yyyy hh:mm a'),
+                                      0,
+                                      []);
+        const newToDoObj = {
+            title: newToDo.getTitle(),
+            description: newToDo.getDescription(),
+            dueDate: newToDo.getDueDate(),
+            priority: newToDo.getPriority()
+        };
+        let toDos = JSON.parse(localStorage.getItem(`project-${projectID}-todos`) || '[]');
+        toDos.push(newToDoObj);
+        localStorage.setItem(`project-${projectID}-todos`, JSON.stringify(toDos));   
+        document.getElementById('content').textContent = '';
+        displayCurrentProjects(JSON.parse(localStorage.getItem('projects') || '[]'));    
+        e.preventDefault();
+    });
 
     return newToDoForm;
 }
@@ -214,7 +232,7 @@ const renderProject = (project, projectID) => {
         toDoTitle.textContent = toDo.title;
 
         const toDoDescription = document.createElement('p');
-        toDoDescription.textContent = toDo.Description;
+        toDoDescription.textContent = toDo.description;
 
         const toDoDueDate = document.createElement('p');
         toDoDueDate.textContent = toDo.dueDate;
