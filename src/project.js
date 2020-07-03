@@ -5,7 +5,21 @@ const Project = (title, description, dueDate, priority, toDoList) => {
     const getTitle = () => title;    
     const getDescription = () => description;
     const getDueDate = () => dueDate;
-    const getPriority = () => priority;
+    const getPriority = () => {
+        switch (priority) {
+            case 0:
+                return 'urgent';
+                break;
+            case 1:
+                return 'high';
+                break;
+            case 2:
+                return 'medium';
+                break;
+            case 3:
+                return 'low';
+        }
+    }
     const getToDoList = () => toDoList;
 
     const addToDoItem = (toDoTitle, toDoDescription, toDoDueDate, toDoPriority) => {

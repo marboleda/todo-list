@@ -65,17 +65,18 @@ const createNewProjectForm = () => {
             case 3:
                 priority = 'low';
         }
-        const optionLabel = document.createElement('label');
-        optionLabel.setAttribute('for', priority);
-        optionLabel.textContent = priority;
 
         const priorityInput = document.createElement('input');
         priorityInput.setAttribute('type', 'radio');
         priorityInput.setAttribute('name', 'priority');
         priorityInput.setAttribute('value', i);
 
-        priorityDiv.appendChild(optionLabel);
+        const optionLabel = document.createElement('label');
+        optionLabel.setAttribute('for', priority);
+        optionLabel.textContent = priority;
+
         priorityDiv.appendChild(priorityInput);
+        priorityDiv.appendChild(optionLabel);
     }
 
 
@@ -98,7 +99,7 @@ const createNewProjectForm = () => {
         const newProject = createNewProject(newProjectForm.elements['title'].value,
                                             newProjectForm.elements['description'].value,
                                             format(addMonths(endOfToday(), 6), 'MM/dd/yyyy hh:mm a'),
-                                            0,
+                                            Number(newProjectForm.elements['priority'].value),
                                             []);
         const newProjectObj = {
             title: newProject.getTitle(),
@@ -209,17 +210,17 @@ const createNewToDoForm = (projectID) => {
             case 3:
                 priority = 'low';
         }
-        const optionLabel = document.createElement('label');
-        optionLabel.setAttribute('for', priority);
-        optionLabel.textContent = priority;
-
         const priorityInput = document.createElement('input');
         priorityInput.setAttribute('type', 'radio');
         priorityInput.setAttribute('name', 'priority');
         priorityInput.setAttribute('value', i);
 
-        priorityDiv.appendChild(optionLabel);
+        const optionLabel = document.createElement('label');
+        optionLabel.setAttribute('for', priority);
+        optionLabel.textContent = priority;
+
         priorityDiv.appendChild(priorityInput);
+        priorityDiv.appendChild(optionLabel);
     }
 
 
@@ -242,7 +243,7 @@ const createNewToDoForm = (projectID) => {
         const newToDo = createNewToDo(newToDoForm.elements['title'].value,
                                       newToDoForm.elements['description'].value,
                                       format(addMonths(endOfToday(), 3), 'MM/dd/yyyy hh:mm a'),
-                                      0,
+                                      Number(newToDoForm.elements['priority'].value),
                                       []);
         const newToDoObj = {
             title: newToDo.getTitle(),
