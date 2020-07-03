@@ -43,6 +43,42 @@ const createNewProjectForm = () => {
     descriptionInput.setAttribute('name','description');
     descriptionInput.required = true;
 
+    const priorityDiv = document.createElement('div');
+    priorityDiv.id = 'priority';
+
+    const priorityLabel = document.createElement('label');
+    priorityLabel.setAttribute('for', 'priority');
+    priorityLabel.innerHTML = '<strong>Priority:</strong>';
+
+    for (let i = 0; i < 4; i++) {
+        let priority;
+        switch (i) {
+            case 0:
+                priority = 'urgent';
+                break;
+            case 1:
+                priority = 'high';
+                break;
+            case 2:
+                priority = 'medium';
+                break;
+            case 3:
+                priority = 'low';
+        }
+        const optionLabel = document.createElement('label');
+        optionLabel.setAttribute('for', priority);
+        optionLabel.textContent = priority;
+
+        const priorityInput = document.createElement('input');
+        priorityInput.setAttribute('type', 'radio');
+        priorityInput.setAttribute('name', 'priority');
+        priorityInput.setAttribute('value', i);
+
+        priorityDiv.appendChild(optionLabel);
+        priorityDiv.appendChild(priorityInput);
+    }
+
+
     const submitButton = document.createElement('button');
     submitButton.textContent = 'Submit';
     submitButton.setAttribute('type','submit');
@@ -52,6 +88,7 @@ const createNewProjectForm = () => {
     newProjectForm.appendChild(titleInput);
     newProjectForm.appendChild(descriptionLabel);
     newProjectForm.appendChild(descriptionInput);
+    newProjectForm.appendChild(priorityDiv);
     newProjectForm.appendChild(submitButton);
 
     newProjectForm.style['display'] = 'none';
@@ -150,6 +187,42 @@ const createNewToDoForm = (projectID) => {
     descriptionInput.setAttribute('name','description');
     descriptionInput.required = true;
 
+    const priorityDiv = document.createElement('div');
+    priorityDiv.id = 'priority';
+
+    const priorityLabel = document.createElement('label');
+    priorityLabel.setAttribute('for', 'priority');
+    priorityLabel.innerHTML = '<strong>Priority:</strong>';
+
+    for (let i = 0; i < 4; i++) {
+        let priority;
+        switch (i) {
+            case 0:
+                priority = 'urgent';
+                break;
+            case 1:
+                priority = 'high';
+                break;
+            case 2:
+                priority = 'medium';
+                break;
+            case 3:
+                priority = 'low';
+        }
+        const optionLabel = document.createElement('label');
+        optionLabel.setAttribute('for', priority);
+        optionLabel.textContent = priority;
+
+        const priorityInput = document.createElement('input');
+        priorityInput.setAttribute('type', 'radio');
+        priorityInput.setAttribute('name', 'priority');
+        priorityInput.setAttribute('value', i);
+
+        priorityDiv.appendChild(optionLabel);
+        priorityDiv.appendChild(priorityInput);
+    }
+
+
     const submitButton = document.createElement('button');
     submitButton.textContent = 'Submit';
     submitButton.setAttribute('type','submit');
@@ -159,6 +232,7 @@ const createNewToDoForm = (projectID) => {
     newToDoForm.appendChild(titleInput);
     newToDoForm.appendChild(descriptionLabel);
     newToDoForm.appendChild(descriptionInput);
+    newToDoForm.appendChild(priorityDiv);
     newToDoForm.appendChild(submitButton);
 
     newToDoForm.style['display'] = 'none';
