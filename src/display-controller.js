@@ -99,8 +99,7 @@ const createNewProjectForm = () => {
         const newProject = createNewProject(newProjectForm.elements['title'].value,
                                             newProjectForm.elements['description'].value,
                                             format(addMonths(endOfToday(), 6), 'MM/dd/yyyy hh:mm a'),
-                                            Number(newProjectForm.elements['priority'].value),
-                                            []);
+                                            Number(newProjectForm.elements['priority'].value));
         const newProjectObj = {
             title: newProject.getTitle(),
             description: newProject.getDescription(),

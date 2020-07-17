@@ -1,6 +1,6 @@
 import { createNewToDo } from './todo'
 
-const Project = (title, description, dueDate, priority, toDoList) => {
+const Project = (title, description, dueDate, priority) => {
 
     const getTitle = () => title;    
     const getDescription = () => description;
@@ -20,7 +20,6 @@ const Project = (title, description, dueDate, priority, toDoList) => {
                 return 'low';
         }
     }
-    const getToDoList = () => toDoList;
 
     const addToDoItem = (toDoTitle, toDoDescription, toDoDueDate, toDoPriority) => {
         toDoList.push(createNewToDo(toDoTitle, toDoDescription, toDoDueDate, toDoPriority, []));
@@ -30,12 +29,11 @@ const Project = (title, description, dueDate, priority, toDoList) => {
         toDoList.splice(index, 1);
     }
 
-    return { getTitle, getDescription, getDueDate, getPriority, getToDoList,
-             addToDoItem, deleteToDo }
+    return { getTitle, getDescription, getDueDate, getPriority, addToDoItem, deleteToDo }
 }
 
-const createNewProject = (title, description, dueDate, priority, toDoList) => {
-    return Project(title, description, dueDate, priority, toDoList);
+const createNewProject = (title, description, dueDate, priority) => {
+    return Project(title, description, dueDate, priority);
 }
 
 export {createNewProject}

@@ -10,18 +10,16 @@ const initialPageLoad = () => {
         const defaultProject = createNewProject('Default Project', 
                                                 "Your first project!", 
                                                 format(addMonths(endOfToday(), 6), 'MM/dd/yyyy hh:mm a'), 
-                                                0, 
-                                                []);
+                                                0);
 
         const projectObj = {
                 title: defaultProject.getTitle(),
                 description: defaultProject.getDescription(),
                 dueDate: defaultProject.getDueDate(),
                 priority: defaultProject.getPriority(),
-                //toDoList: defaultProject.getToDoList()
         };
         localStorage.setItem('projects', JSON.stringify([projectObj]));
-        localStorage.setItem('project-0-todos', JSON.stringify(defaultProject.getToDoList()));
+        localStorage.setItem('project-0-todos', JSON.stringify([]));
     }
 
     displayWebPageTitle('ToDo List');
