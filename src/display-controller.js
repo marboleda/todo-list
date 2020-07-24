@@ -138,6 +138,25 @@ const displayCreateNewProjectButton = () => {
     createNewProjectForm();           
 }
 
+const createDeleteProjectButton = (projectID) => {
+    const deleteProjectButton = document.createElement('button');
+    deleteProjectButton.classList.add('delete-project');
+    deleteProjectButton.textContent = 'Delete Project';
+        
+    deleteProjectButton.addEventListener('click', () => {
+        //Remove all to-dos first
+        localStorage.removeItem(`project-${projectID}-todos`);
+        const oldProjects = JSON.parse(localStorage.getItem('projects') || '[]');
+        const newProjects = oldProjects.splice(projectID, 1);
+        localStorage.setItem('projects', JSON.stringify(newProjects));
+        //Take care of removing the visual element
+        document.querySelector(`[data-project='${projectID}']`).remove();
+        //TO-DO: Add a projectID attribute to every project object. This stops the IDs from getting out of sync when deleting projects!
+    });
+    
+    return deleteProjectButton;
+}
+
 const createAddToDoButton = (projectID) => {
     const newToDoButton = document.createElement('button');
     newToDoButton.classList.add('new-todo');
@@ -289,6 +308,7 @@ const renderProject = (project, projectID) => {
     projectInfo.appendChild(projectDescription);
     projectInfo.appendChild(projectDueDate);
     projectInfo.appendChild(projectPriority);
+    projectInfo.appendChild(createDeleteProjectButton(projectID));
 
     projectDiv.appendChild(projectInfo);
 
