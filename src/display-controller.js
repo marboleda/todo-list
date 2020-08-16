@@ -9,8 +9,8 @@ const displayWebPageTitle = (title) => {
 }
 
 const displayCurrentProjects = (projectArray) => {
-    projectArray.forEach((project, index) => {
-        renderProject(project, index);
+    projectArray.forEach((project) => {
+        renderProject(project);
     });
     
 }
@@ -95,18 +95,21 @@ const createNewProjectForm = () => {
     newProjectForm.style['display'] = 'none';
 
     newProjectForm.addEventListener('submit', (e) => {
+        let projects = JSON.parse(localStorage.getItem('projects') || '[]');
+
         const newProjectForm = document.forms['new-project'];
-        const newProject = createNewProject(newProjectForm.elements['title'].value,
+        const newProject = createNewProject(projects[projects.length-1].id + 1, 
+                                            newProjectForm.elements['title'].value,
                                             newProjectForm.elements['description'].value,
                                             format(addMonths(endOfToday(), 6), 'MM/dd/yyyy hh:mm a'),
                                             Number(newProjectForm.elements['priority'].value));
         const newProjectObj = {
+            id: newProject.getProjectId(),
             title: newProject.getTitle(),
             description: newProject.getDescription(),
             dueDate: newProject.getDueDate(),
             priority: newProject.getPriority()
         }
-        let projects = JSON.parse(localStorage.getItem('projects') || '[]');
         projects.push(newProjectObj);
         localStorage.setItem('projects', JSON.stringify(projects));
         e.preventDefault();
@@ -146,12 +149,18 @@ const createDeleteProjectButton = (projectID) => {
     deleteProjectButton.addEventListener('click', () => {
         //Remove all to-dos first
         localStorage.removeItem(`project-${projectID}-todos`);
+
         const oldProjects = JSON.parse(localStorage.getItem('projects') || '[]');
-        const newProjects = oldProjects.splice(projectID, 1);
+        const newProjects = [];
+        oldProjects.forEach(oldProject => {
+            if (oldProject.id != projectID) {
+                newProjects.push(oldProject);
+            }
+        })
         localStorage.setItem('projects', JSON.stringify(newProjects));
+
         //Take care of removing the visual element
         document.querySelector(`[data-project='${projectID}']`).remove();
-        //TO-DO: Add a projectID attribute to every project object. This stops the IDs from getting out of sync when deleting projects!
     });
     
     return deleteProjectButton;
@@ -281,10 +290,10 @@ const createNewToDoForm = (projectID) => {
 }
 
 
-const renderProject = (project, projectID) => {
+const renderProject = (project) => {
     const projectDiv = document.createElement('div');
     projectDiv.classList.add('project');
-    projectDiv.setAttribute('data-project', projectID.toString());
+    projectDiv.setAttribute('data-project', project.id);
 
     const projectInfo = document.createElement('div');
     projectInfo.classList.add('project-info');
@@ -308,19 +317,19 @@ const renderProject = (project, projectID) => {
     projectInfo.appendChild(projectDescription);
     projectInfo.appendChild(projectDueDate);
     projectInfo.appendChild(projectPriority);
-    projectInfo.appendChild(createDeleteProjectButton(projectID));
+    projectInfo.appendChild(createDeleteProjectButton(project.id));
 
     projectDiv.appendChild(projectInfo);
 
     const toDoItems = document.createElement('div');
     toDoItems.classList.add('todo-items');
 
-    const toDoObjs = JSON.parse(localStorage.getItem(`project-${projectID}-todos`) || '[]');
+    const toDoObjs = JSON.parse(localStorage.getItem(`project-${project.id}-todos`) || '[]');
     
     toDoObjs.forEach((toDo, toDoID) => {
         const toDoDiv = document.createElement('div');
         toDoDiv.classList.add('todo');
-        toDoDiv.setAttribute('data-todo', `${projectID.toString()}-${toDoID}` );
+        toDoDiv.setAttribute('data-todo', `${project.id}-${toDoID}` );
 
         const toDoTitle = document.createElement('h4');
         toDoTitle.textContent = toDo.title;
@@ -344,8 +353,8 @@ const renderProject = (project, projectID) => {
 
     projectDiv.appendChild(toDoItems);
 
-    projectDiv.appendChild(createAddToDoButton(projectID));
-    projectDiv.appendChild(createNewToDoForm(projectID));
+    projectDiv.appendChild(createAddToDoButton(project.id));
+    projectDiv.appendChild(createNewToDoForm(project.id));
 
     document.getElementById('content').appendChild(projectDiv);
 }

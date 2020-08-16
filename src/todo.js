@@ -1,7 +1,8 @@
 //contains all functionality (create, edit, remove, etc.) pertaining to To-Do List items
 
-const ToDo = (title, description, dueDate, priority, checkList) => {
+const ToDo = (toDoNum, title, description, dueDate, priority, checkList) => {
     
+    const getToDoNum = () => toDoNum;
     const getTitle = () => title;
     const getDescription = () => description;
     const getDueDate = () => dueDate;
@@ -30,7 +31,7 @@ const ToDo = (title, description, dueDate, priority, checkList) => {
         checkList.splice(index,1);
     }
 
-    return { getTitle, getDescription, getDueDate, getPriority, getCheckList,
+    return { getToDoNum, getTitle, getDescription, getDueDate, getPriority, getCheckList,
              addItemToCheckList, deleteCheckListItem };
 }
 

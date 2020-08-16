@@ -1,7 +1,8 @@
 import { createNewToDo } from './todo'
 
-const Project = (title, description, dueDate, priority) => {
+const Project = (id, title, description, dueDate, priority) => {
 
+    const getProjectId = () => id;
     const getTitle = () => title;    
     const getDescription = () => description;
     const getDueDate = () => dueDate;
@@ -29,7 +30,7 @@ const Project = (title, description, dueDate, priority) => {
         toDoList.splice(index, 1);
     }
 
-    return { getTitle, getDescription, getDueDate, getPriority, addToDoItem, deleteToDo }
+    return { getProjectId, getTitle, getDescription, getDueDate, getPriority, addToDoItem, deleteToDo }
 }
 
 const createNewProject = (title, description, dueDate, priority) => {

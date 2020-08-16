@@ -7,12 +7,14 @@ const initialPageLoad = () => {
 
     const createDefaultProject = () => {
 
-        const defaultProject = createNewProject('Default Project', 
+        const defaultProject = createNewProject(0,
+                                                'Default Project', 
                                                 "Your first project!", 
                                                 format(addMonths(endOfToday(), 6), 'MM/dd/yyyy hh:mm a'), 
                                                 0);
 
         const projectObj = {
+                id: defaultProject.getProjectId(),
                 title: defaultProject.getTitle(),
                 description: defaultProject.getDescription(),
                 dueDate: defaultProject.getDueDate(),
