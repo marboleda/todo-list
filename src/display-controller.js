@@ -266,19 +266,22 @@ const createNewToDoForm = (projectID) => {
     newToDoForm.style['display'] = 'none';
 
     newToDoForm.addEventListener('submit', (e) => {
+        let toDos = JSON.parse(localStorage.getItem(`project-${projectID}-todos`) || '[]');
+
         const newToDoForm = document.forms[`project-${projectID}-newToDoForm`];
-        const newToDo = createNewToDo(newToDoForm.elements['title'].value,
+        const newToDo = createNewToDo((toDos.length > 0) ? (toDos[toDos.length-1].toDoNum + 1) : 0,
+                                      newToDoForm.elements['title'].value,
                                       newToDoForm.elements['description'].value,
                                       format(addMonths(endOfToday(), 3), 'MM/dd/yyyy hh:mm a'),
                                       Number(newToDoForm.elements['priority'].value),
                                       []);
         const newToDoObj = {
+            toDoNum: newToDo.getToDoNum(),
             title: newToDo.getTitle(),
             description: newToDo.getDescription(),
             dueDate: newToDo.getDueDate(),
             priority: newToDo.getPriority()
         };
-        let toDos = JSON.parse(localStorage.getItem(`project-${projectID}-todos`) || '[]');
         toDos.push(newToDoObj);
         localStorage.setItem(`project-${projectID}-todos`, JSON.stringify(toDos));   
         document.getElementById('content').textContent = '';
@@ -326,10 +329,10 @@ const renderProject = (project) => {
 
     const toDoObjs = JSON.parse(localStorage.getItem(`project-${project.id}-todos`) || '[]');
     
-    toDoObjs.forEach((toDo, toDoID) => {
+    toDoObjs.forEach((toDo) => {
         const toDoDiv = document.createElement('div');
         toDoDiv.classList.add('todo');
-        toDoDiv.setAttribute('data-todo', `${project.id}-${toDoID}` );
+        toDoDiv.setAttribute('data-todo', `${project.id}-${toDo.toDoNum}` );
 
         const toDoTitle = document.createElement('h4');
         toDoTitle.textContent = toDo.title;
