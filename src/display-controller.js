@@ -292,6 +292,28 @@ const createNewToDoForm = (projectID) => {
     return newToDoForm;
 }
 
+const createDeleteToDoButton = (projectID, toDoNum) => {
+    const deleteToDoButton = document.createElement('button');
+    deleteToDoButton.classList.add('todo-delete-button');
+    deleteToDoButton.textContent = 'Delete this To Do';
+
+    deleteToDoButton.addEventListener('click', () => {
+        const oldToDos = JSON.parse(localStorage.getItem(`project-${projectID}-todos`) || '[]');
+        const newToDos = [];
+        oldToDos.forEach(oldToDo => {
+            if (oldToDo.toDoNum != toDoNum) {
+                newToDos.push(oldToDo);
+            }
+        })
+        localStorage.setItem(`project-${projectID}-todos`, JSON.stringify(newToDos));
+
+        //Take care of removing the visual element
+        document.querySelector(`[data-todo='${projectID}-${toDoNum}']`).remove();
+    });
+
+    return deleteToDoButton;
+}
+
 
 const renderProject = (project) => {
     const projectDiv = document.createElement('div');
@@ -350,6 +372,7 @@ const renderProject = (project) => {
         toDoDiv.appendChild(toDoDescription);
         toDoDiv.appendChild(toDoDueDate);
         toDoDiv.appendChild(toDoPriority);
+        toDoDiv.appendChild(createDeleteToDoButton(project.id, toDo.toDoNum))
 
         toDoItems.appendChild(toDoDiv);
     });
