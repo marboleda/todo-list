@@ -1,0 +1,27 @@
+.project-info {
+    border: 3px solid green;
+    padding: 5px;
+    margin-bottom: 0px;
+    border-radius: 10px;
+    background-color: #00FF00;
+}
+
+.todo, .new-todo {
+    position: relative;
+    left: 3vw;
+}
+
+.todo-items, h4 {
+    margin-top: 0px;
+}
+
+.todo {
+    border: 2px solid #BDB76B;
+    border-radius: 5px;
+    background-color: #F0E68C;
+    width: 95vw;
+}
+
+.todo > * {
+    margin: 3px auto;
+}
