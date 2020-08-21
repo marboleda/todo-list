@@ -8,6 +8,8 @@ Demo: [Link](https://marboleda.github.io/todo-list)
 - HTML
 - CSS
 - JavaScript
+- npm
+- Webpack
 
 ## What did I learn?
 - Implementing local browser data persistence via localStorage
